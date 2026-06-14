@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Doctors Management | Admin Panel</title>
+    <meta charset="utf-8">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <style>
+        body { background: #f4f6f9; }
+        .nav-tabs .nav-link { font-weight: 500; }
+        .table img {
+            width: 60px;
+            height: 60px;
+            object-fit: cover;
+            border-radius: 50%;
+        }
+    </style>
+    
+<script language="Javascript" type="text/javascript">
+
+
+	function createRequestObject() {
+		var tmpXmlHttpObject;
+		if (window.XMLHttpRequest) {
+				tmpXmlHttpObject = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			tmpXmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	
+		return tmpXmlHttpObject;
+	}
+	
+	
+	var http = createRequestObject();
+	
+	function makeGetRequest1(st) {
+	   // st=document.frm.state.value;
+	   
+		http.open('get', '/UseridVali?userid=' + st);
+		http.onreadystatechange = processResponse1;
+		http.send(null);
+	}
+	
+	function processResponse1() {
+		if(http.readyState == 4){
+			var response = http.responseText;
+			if(response.includes("Userid is Not available, Please try another!!"))
+			{
+				//alert("yes")
+				document.getElementById('userid').value=""
+			}
+			document.getElementById('useridvali').innerHTML = response;
+		}
+	}
+	 
+	</script>
+<script language="Javascript" type="text/javascript">
+ 
+
+	function createRequestObject() {
+		var tmpXmlHttpObject;
+		if (window.XMLHttpRequest) {
+				tmpXmlHttpObject = new XMLHttpRequest();
+		} else if (window.ActiveXObject) {
+			tmpXmlHttpObject = new ActiveXObject("Microsoft.XMLHTTP");
+		}
+	
+		return tmpXmlHttpObject;
+	}
+	
+	
+	var http = createRequestObject();
+	
+	function makeGetRequest(st) {
+	   // st=document.frm.state.value;
+	   //alert(st);
+		http.open('get', '/Cities?state=' + st);
+		http.onreadystatechange = processResponse;
+		http.send(null);
+	}
+	
+	function processResponse() {
+		if(http.readyState == 4){
+			var response = http.responseText;
+            //alert(response);
+			document.getElementById('cities').innerHTML = response;
+		}
+	}
+	 
+	</script>
+</head>
+
+<body>
+	{% include "top_admin1.html" %}
+<div class="container-fluid mt-4">
+
+    <h4 class="mb-3">Doctors Management</h4>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#report">
+                Doctors Report
+            </a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#register">
+                Register Doctor
+            </a>
+        </li>
+    </ul>
+
+    <div class="tab-content bg-white p-3">
+
+        <!-- ================= TAB 1 : REPORT ================= -->
+        <div class="tab-pane fade show active" id="report">
+            <div class="table-responsive">
+                <table class="table table-bordered table-striped mt-3">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>ID</th>
+                            <th>Photo</th>
+                            <th>Name</th>
+                            <th>Speciality</th>
+                            <th>Mobile</th>
+                            <th>Hospital</th>
+                            <th>City</th>
+                            <th>Fees</th>
+                            <th>Rating</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in list %}
+                        <tr>
+                            <td>{{ d.0 }}</td>
+                            <td>
+                                {% if d.2 %}
+                                    <img src="../static/{{ d.2 }}">
+                                {% else %}
+                                    <img src="../static/doctors/default-doctor.png">
+                                {% endif %}
+                            </td>
+                            <td>{{ d.8 }}</td>
+                            <td>{{ d.1 }}</td>
+                            <td>{{ d.9 }}</td>
+                            <td>{{ d.7 }}</td>
+                            <td>{{ d.6 }}</td>
+                            <td>{{ d.12 }}</td>
+                            <td>{{ d.13 }}</td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="9" class="text-center">No Doctors Found</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- ================= TAB 2 : REGISTRATION ================= -->
+        <div class="tab-pane fade" id="register">
+            <form method="POST" id="doctorFrm" action="/register-doctor/" enctype="multipart/form-data" class="mt-3">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 form-group">
+                        <label>Doctor Name</label>
+                        <input type="text" name="docname" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Speciality</label>
+                        <select class="form-control" name="speciality" id="speciality" required>
+        <option value="">-- Select Speciality --</option>
+        <option value="Cardiologist">Cardiologist</option>
+        <option value="Dentist">Dentist</option>
+        <option value="Dermatologist">Dermatologist</option>
+        <option value="ENT">ENT</option>
+        <option value="General Physician">General Physician</option>
+        <option value="Neurologist">Neurologist</option>
+        <option value="Pediatrician">Pediatrician</option>
+        <option value="Psychiatrist">Psychiatrist</option>
+        <option value="Orthopedic">Orthopedic</option>
+        <option value="Other">Other</option>
+    </select>
+                       
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Mobile</label>
+                        <input type="text" name="mobile" pattern="\d{10}" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Education</label>
+                        <input type="text" name="education" class="form-control">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Hospital Name</label>
+                        <input type="text" name="hospname" class="form-control">
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>State</label>
+                        <select name="state" class="form-control" onchange="makeGetRequest(this.value)" required>
+                    {% for rec in states %}
+                        {% for val in rec %}
+                            <option value="{{ val }}">{{ val }}</option>
+                        {% endfor %}
+                    {% endfor %}
+                </select>
+                         
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>City</label>
+                        <div id="cities">
+    <select name="city" class="form-control" required>
+         <option><--select city--></option>        
+</select>
+                        </div>
+                         
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                         <div class="row">
+                        <div class="col-md-6">
+    <label>OPD Days (From)</label>
+    <select name="opd_day_from" class="form-control" required>
+        <option value="">Select Day</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+    </select>
+</div>
+
+<div class="col-md-6  ">
+    <label>OPD Days (To)</label>
+    <select name="opd_day_to" class="form-control" required>
+        <option value="">Select Day</option>
+        <option>Monday</option>
+        <option>Tuesday</option>
+        <option>Wednesday</option>
+        <option>Thursday</option>
+        <option>Friday</option>
+        <option>Saturday</option>
+    </select>
+</div>
+</div>
+                    </div>
+<div class="col-md-6 form-group">
+    <label>OPD Morning Timing</label>
+    <div class="row"> 
+   <div class="col-md-4">
+        <select name="morning_hour" class="form-control">
+            <option value="">Hour</option>
+           
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <select name="morning_minute" class="form-control">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <select name="morning_ampm" class="form-control">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+    </div></div>
+</div>
+
+<div class="col-md-6 form-group">
+    <label>OPD Evening Timing</label>
+    <div class="d-flex">
+      <div class="row"> 
+   <div class="col-md-4">
+        <select name="eve_hour" class="form-control">
+            <option value="">Hour</option>
+           
+    <option value="1">1</option>
+    <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option>
+    <option value="11">11</option>
+    <option value="12">12</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <select name="eve_minute" class="form-control">
+            <option value="00">00</option>
+            <option value="15">15</option>
+            <option value="30">30</option>
+            <option value="45">45</option>
+        </select>
+    </div>
+
+    <div class="col-md-4">
+        <select name="eve_ampm" class="form-control">
+            <option value="AM">AM</option>
+            <option value="PM">PM</option>
+        </select>
+    </div></div>
+    </div>
+</div>
+
+
+
+                    <div class="col-md-6 form-group">
+                        <label>Fees</label>
+                        <input type="number" name="fees" class="form-control">
+                    </div>
+<div class="col-md-6 form-group">
+    <label>Home Visit Available?</label>
+    <select name="home_visit" id="home_visit" class="form-control" onchange="toggleHomeCharges()" required>
+        <option value="">Select</option>
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+</div>
+
+<div class="col-md-6 form-group" id="home_charge_div" style="display:none;">
+    <label>Home Visit Charges (₹)</label>
+    <input type="number" name="home_visit_charges" class="form-control" min="0">
+</div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Address</label>
+                        <textarea name="addr" class="form-control" rows="3"></textarea>
+                    </div>
+<div class="col-md-6 form-group">
+                        <label>Pincode</label>
+                        <input type="text" name="pincode" class="form-control" required>
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>User ID</label>
+                        <input type="text" name="userid" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Password</label>
+                        <input type="password" name="password" class="form-control" required>
+                    </div>
+
+                    <div class="col-md-6 form-group">
+                        <label>Doctor Photo</label>
+                        <input type="file" name="photo" class="form-control">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label>Email id</label>
+                        <input type="email" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]{2,9}+\.[a-z]{2,4}$" required class="form-control " placeholder="Email">
+                    </div>
+                    
+                </div>
+
+                <button type="submit" class="btn btn-primary mt-2">
+                    Register Doctor
+                </button>
+
+            </form>
+        </div>
+
+    </div>
+</div>
+<script>
+$(document).ready(function () {
+
+    $("#doctorFrm").submit(function (e) {
+        e.preventDefault();   // stop normal form submit
+
+        $.ajax({
+            url: "/register-doctor/",
+            type: "POST",
+            data: new FormData(this),   // IMPORTANT for file upload
+            processData: false,
+            contentType: false,
+
+            success: function (res) {
+                alert(res.message);
+
+                if (res.message.includes("success")) {
+                    location.reload();   // 🔄 refresh to show updated report
+                }
+            },
+
+            error: function () {
+                alert("Doctor registration failed!");
+            }
+        });
+    });
+
+});
+</script>
+<script>
+function toggleHomeCharges() {
+    let visit = document.getElementById("home_visit").value;
+    let div = document.getElementById("home_charge_div");
+
+    if (visit === "Yes") {
+        div.style.display = "block";
+    } else {
+        div.style.display = "none";
+    }
+}
+</script>
+
+<!-- JS -->
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

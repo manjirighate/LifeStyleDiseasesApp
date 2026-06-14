@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Chronic Diseases | Admin Panel</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+        .card {
+            box-shadow: 0 2px 6px rgba(0,0,0,.08);
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+{% include "top_user.html" %}
+<div class="container-fluid mt-4">
+
+    <!-- PAGE HEADER -->
+    <div class="row mb-3">
+        <div class="col-md-12">
+            <h4>Chronic Diseases Management</h4>
+        </div>
+    </div>
+
+    <!-- TABS -->
+    <div class="card">
+        <div class="card-body">
+
+            <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                    <a class="nav-link active" data-toggle="tab" href="#report">
+                        Disease Report
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="tab" href="#add">
+                        Add Disease
+                    </a>
+                </li>
+            </ul>
+
+            <div class="tab-content mt-3">
+
+                <!-- =================== REPORT TAB =================== -->
+                <div class="tab-pane fade show active" id="report">
+
+                    <table class="table table-bordered table-striped table-sm">
+                        <thead class="thead-dark">
+                            <tr>
+                                  
+                                <th>Disease Name</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for d in list %}
+                            <tr>
+                            
+                                <td>{{ d.2 }}</td>
+                                <td>
+                                    <span class="badge badge-info">
+                                        {{ d.3 }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="4" class="text-center">
+                                    No disease records found
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <!-- =================== ADD TAB =================== -->
+                <div class="tab-pane fade" id="add">
+
+                    <form id="diseaseFrm" method="POST">
+                        {% csrf_token %}
+
+                        <div class="row">
+
+                            
+
+                            <div class="col-md-6 form-group">
+                                <label>Disease Name</label>
+                                <input type="text" name="diseaseName" class="form-control" required>
+                            </div>
+
+                            <div class="col-md-6 form-group">
+                                <label>Disease Status</label>
+                                <select name="diseaseSts" class="form-control" required>
+                                    <option value="">-- Select Status --</option>
+                                    <option value="Chronic">Chronic</option>
+                                    <option value="Active">Active</option>
+                                    <option value="Recovered">Recovered</option>
+                                </select>
+                            </div>
+
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">
+                            Save Disease
+                        </button>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+<!-- JS -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+
+<script>
+$("#diseaseFrm").submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: "/register-disease/",
+        data: $(this).serialize(),
+
+        success: function(res){
+            alert(res.message);
+            if(res.message.includes("success")){
+                location.reload(); // refresh report
+            }
+        },
+        error: function(){
+            alert("Error saving disease!");
+        }
+    });
+});
+</script>
+
+</body>
+</html>

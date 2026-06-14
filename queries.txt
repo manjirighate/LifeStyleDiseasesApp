@@ -1,0 +1,114 @@
+
+ CREATE TABLE symptoms (
+    symptom_id INT AUTO_INCREMENT PRIMARY KEY,
+    symptom_name VARCHAR(100) UNIQUE
+);
+CREATE TABLE diseases_common (
+    disease_id INT AUTO_INCREMENT PRIMARY KEY,
+    disease_name VARCHAR(100),
+    speciality VARCHAR(50)
+);
+CREATE TABLE disease_symptom_map (
+    disease_id INT,
+    symptom_id INT,
+    PRIMARY KEY (disease_id, symptom_id)
+);
+
+
+INSERT INTO symptoms (symptom_name) VALUES
+('Headache'),
+('Fever'),
+('Cough'),
+('Chest Pain'),
+('Shortness of Breath'),
+('Fatigue'),
+('Nausea'),
+('Vomiting'),
+('Dizziness'),
+('Joint Pain'),
+('Back Pain'),
+('Abdominal Pain'),
+('Diarrhea'),
+('Constipation'),
+('Weight Loss'),
+('Weight Gain'),
+('Blurred Vision'),
+('Skin Rash'),
+('Itching'),
+('Hair Loss'),
+('Anxiety'),
+('Depression'),
+('Insomnia'),
+('Memory Loss'),
+('Seizures'),
+('Palpitations'),
+('High Blood Pressure'),
+('Low Blood Sugar'),
+('Frequent Urination'),
+('Thirst'),
+('Ear Pain'),
+('Hearing Loss'),
+('Sneezing'),
+('Sore Throat'),
+('Swelling');
+
+
+
+INSERT INTO diseases_common (disease_name, speciality) VALUES
+('Migraine', 'Neurologist'),
+('Hypertension', 'Cardiologist'),
+('Diabetes Mellitus', 'General Physician'),
+('Coronary Artery Disease', 'Cardiologist'),
+('Asthma', 'Pulmonologist'),
+('Gastritis', 'General Physician'),
+('Irritable Bowel Syndrome', 'Gastroenterologist'),
+('Depression', 'Psychiatrist'),
+('Anxiety Disorder', 'Psychiatrist'),
+('Epilepsy', 'Neurologist'),
+('Osteoarthritis', 'Orthopedic'),
+('Rheumatoid Arthritis', 'Orthopedic'),
+('Dermatitis', 'Dermatologist'),
+('Psoriasis', 'Dermatologist'),
+('Acne Vulgaris', 'Dermatologist'),
+('Sinusitis', 'ENT'),
+('Otitis Media', 'ENT'),
+('Common Cold', 'General Physician'),
+('Pneumonia', 'Pulmonologist'),
+('Obesity', 'General Physician');
+
+INSERT INTO disease_symptom_map VALUES
+(1,1),(1,7),(1,9),(1,17),(1,23),
+(10,25),(10,24),(10,9),(10,6);
+
+INSERT INTO disease_symptom_map VALUES
+(2,27),(2,26),(2,6),(2,25),
+(4,4),(4,5),(4,26),(4,6),(4,25);
+
+INSERT INTO disease_symptom_map VALUES
+(3,28),(3,29),(3,30),(3,6),(3,15),
+(6,12),(6,7),(6,8),(6,6),
+(18,2),(18,3),(18,34),(18,6),
+(20,16),(20,6),(20,26),(20,15);
+
+INSERT INTO disease_symptom_map VALUES
+(5,3),(5,5),(5,6),(5,33),
+(19,2),(19,3),(19,5),(19,6);
+
+INSERT INTO disease_symptom_map VALUES
+(8,21),(8,22),(8,23),(8,6),
+(9,21),(9,23),(9,25),(9,6);
+
+INSERT INTO disease_symptom_map VALUES
+(11,10),(11,11),(11,35),(11,6),
+(12,10),(12,11),(12,35),(12,6);
+INSERT INTO disease_symptom_map VALUES
+(13,18),(13,19),(13,6),
+(14,18),(14,19),(14,20),
+(15,18),(15,20);
+
+
+INSERT INTO disease_symptom_map VALUES
+(16,1),(16,33),(16,34),(16,31),
+(17,31),(17,32),(17,2);
+ 
+select * from disease_symptom_map

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>LifeStyle Diseases Prediction</title>
+	
+	<!-- Meta tag Keywords -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta charset="utf-8">
+	 <script type="application/x-javascript">
+		addEventListener("load", function () {
+			setTimeout(hideURLbar, 0);
+		}, false);
+
+		function hideURLbar() {
+			window.scrollTo(0, 1);
+		}
+	</script>
+  
+</head>
+
+<body>
+	{% include "top_admin1.html" %}
+	 
+    <!-- Page Content -->
+    <div class="container-fluid mt-4">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h6>Total Users</h6>
+                        <h3>120</h3>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="card shadow-sm">
+                    <div class="card-body text-center">
+                        <h6>Total Doctors</h6>
+                        <h3>35</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <h2>Users</h2>
+	<div class="card-block table-border-style">
+		<div class="table-responsive">
+			<table class="table table-animated" width="100%"> 
+        <tr>
+            <th>User Name</th>
+            <th>Mobile</th>
+            <th>Email</th>
+            <th>Address</th>
+            <th>Profession</th>
+			<th>State</th>
+			<th>City</th>
+        </tr>
+        {% for rec in list %}
+        <tr>
+			{% for val in rec %}
+			<td> {{val}} </td>
+            
+			{% endfor %}</tr>
+		{% endfor %}
+
+    </table>
+</div>
+   
+	</section>
+    
+</body>
+</html>

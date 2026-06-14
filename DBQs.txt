@@ -1,0 +1,132 @@
+CREATE TABLE "users" (
+  "userid" varchar(200) NOT NULL,
+  "username" varchar(200) DEFAULT NULL,
+  "pass" varchar(200) DEFAULT NULL,
+  "loginsts" varchar(200) DEFAULT NULL,
+  "utype" varchar(200) DEFAULT NULL,
+  "email" varchar(200) DEFAULT NULL,
+  PRIMARY KEY ("userid")
+);
+
+CREATE TABLE "userdetails" (
+  "id" int NOT NULL,
+  "userName" varchar(200) DEFAULT NULL,
+  "userid" varchar(200) DEFAULT NULL,
+  "mobile" varchar(200) DEFAULT NULL,
+  "email" varchar(200) DEFAULT NULL,
+  "addr" varchar(200) DEFAULT NULL,
+  "profession" varchar(200) DEFAULT NULL,
+  "state" varchar(200) DEFAULT NULL,
+  "city" varchar(200) DEFAULT NULL,
+  "country" varchar(200) DEFAULT NULL,
+  "gender" varchar(200) DEFAULT NULL,
+  "dob" varchar(200) DEFAULT NULL,
+  PRIMARY KEY ("id")
+);
+
+CREATE TABLE "cities" (
+  "city" text,
+  "state" text,
+  "cityId" int NOT NULL,
+  PRIMARY KEY ("cityId")
+);
+
+CREATE TABLE "statemaster" (
+  "state" varchar(200) NOT NULL,
+  PRIMARY KEY ("state")
+);
+
+CREATE TABLE "doctors" (
+  "docid" int NOT NULL,
+  "speciality" varchar(200) DEFAULT NULL,
+  "photo" varchar(200) DEFAULT NULL,
+  "addr" varchar(600) DEFAULT NULL,
+  "education" varchar(200) DEFAULT NULL,
+  "state" varchar(200) DEFAULT NULL,
+  "city" varchar(200) DEFAULT NULL,
+  "hospname" varchar(200) DEFAULT NULL,
+  "docname" varchar(200) DEFAULT NULL,
+  "mobile" varchar(200) DEFAULT NULL,
+  "opdtiming" varchar(200) DEFAULT NULL,
+  "opddays" varchar(200) DEFAULT NULL,
+  "fees" double DEFAULT NULL,
+  "rating" double DEFAULT NULL,
+  PRIMARY KEY ("docid")
+);
+
+CREATE TABLE "django_session" (
+  "session_key" varchar(40) NOT NULL,
+  "session_data" longtext NOT NULL,
+  "expire_date" datetime(6) NOT NULL,
+  PRIMARY KEY ("session_key"),
+  KEY "django_session_expire_date_a5c62663" ("expire_date")
+);
+
+CREATE TABLE "django_migrations" (
+  "id" bigint NOT NULL AUTO_INCREMENT,
+  "app" varchar(255) NOT NULL,
+  "name" varchar(255) NOT NULL,
+  "applied" datetime(6) NOT NULL,
+  PRIMARY KEY ("id")
+);
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "userlogin"(in userid1 varchar(200),in pass1 varchar(200))
+begin
+select * from users where userid=userid1 and pass=pass1 and loginsts='active';
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "updatePass"(in userid1 varchar(200),in pass1 varchar(200))
+begin 
+ update users set pass=pass1, loginsts='active' where userid=userid1;
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "insertUser"(in userid1 varchar(200),in pass1 varchar(200),
+ in custNm varchar(200),addr1 varchar(200), in mob varchar(30), in emailId varchar(200),gender1 varchar(200)
+ ,dob1 varchar(200),state1 varchar(200),city1 varchar(300),profession1 varchar(200) )
+begin
+declare mxid integer;
+set mxid=(select ifnull(max(id),1000) from userdetails);
+set mxid=mxid+1;
+insert into userdetails values(mxid,custNm,userid1,mob,emailId,addr1,profession1,state1,city1,'India',gender1,dob1);
+insert into users values(userid1,custNm,pass1,'active','user',emailId); 
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "getUsers"()
+begin
+select * from userdetails;
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "getstates"()
+begin
+select distinct(state) from statemaster;
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "getcities"(in state1 varchar(200))
+begin
+select * from cities where state=state1;
+end$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "chkPass"(in userid1 varchar(200),in pass1 varchar(200))
+BEGIN
+select * from users where userid=userid1 and pass=pass1;
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER="avnadmin"@"%" PROCEDURE "changePassword"(in userid1 varchar(200),in pass1 varchar(200))
+BEGIN
+update users set pass=pass1 where userid=userid1;
+END$$
+DELIMITER ;

@@ -1,0 +1,77 @@
+{% if error %}
+<div class="alert alert-danger text-center">
+    {{ error }}
+</div>
+{% endif %}
+
+{% if list %}
+<div class="row g-4">
+
+{% for d in list %}
+<div class="col-md-6">
+    <div class="card shadow-sm h-100">
+        <div class="card-body d-flex">
+
+            <!-- Doctor Photo -->
+            <div class="me-3">
+                {% if d.7 %}
+                <img src="../static/{{ d.7 }}"
+                     class="rounded-circle"
+                     width="80" height="80"
+                     style="object-fit:cover;">
+                {% else %}
+                <img src="../static/doctors/default-doctor.png"
+                     class="rounded-circle"
+                     width="80" height="80">
+                {% endif %}
+            </div>
+
+            <!-- Doctor Info -->
+            <div class="flex-grow-1">
+                <h5 class="mb-1">{{ d.1 }}</h5>
+                <div class="text-muted small">
+                    {{ d.2 }} • {{ d.3 }}
+                </div>
+
+                <div class="mt-1">
+                    <strong>Hospital:</strong> {{ d.4 }}
+                </div>
+
+                <div class="mt-1">
+                    <strong>Fees:</strong> ₹{{ d.5 }}
+                </div>
+
+                <div class="mt-1">
+                    <strong>Rating:</strong>
+                    ⭐ {{ d.6|default:"N/A" }}
+                </div>
+
+                <div class="mt-1 text-success">
+                    <strong>Distance:</strong>
+                    {{ d.9|floatformat:2 }} km
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Actions -->
+        <div class="card-footer bg-light d-flex justify-content-between">
+            <a class="btn btn-outline-primary btn-sm" target="_blank"
+                    href="/doctorDetails?userid={{ d.11 }}">
+                View Profile
+            </a>
+
+             
+        </div>
+
+    </div>
+</div>
+{% endfor %}
+
+</div>
+
+{% else %}
+<div class="alert alert-warning text-center">
+    No doctors found near your location.
+</div>
+{% endif %}

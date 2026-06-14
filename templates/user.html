@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lifestyle Diseases Prediction</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <style>
+        .dashboard-card {
+            transition: 0.3s;
+            border-radius: 15px;
+        }
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+        }
+        .card-icon {
+            font-size: 45px;
+        }
+    </style>
+</head>
+
+<body>
+{% include "top_user.html" %}
+
+<div class="container mt-5">
+
+    <h3 class="text-center mb-2">Welcome to Lifestyle Disease Prediction System</h3>
+    <p class="text-center text-muted mb-5">
+        Analyze your lifestyle habits and get guidance to improve your health
+    </p>
+
+    <div class="row justify-content-center">
+
+        <!-- Analyze Lifestyle -->
+        <div class="col-md-5 mb-4">
+            <div class="card dashboard-card text-center p-4">
+                <div class="card-body">
+                    <div class="card-icon text-primary mb-3">🧠</div>
+                    <h5 class="card-title">Analyze Your Lifestyle</h5>
+                    <p class="card-text">
+                        Enter your daily habits and health details to analyze your
+                        lifestyle-related disease risk.
+                    </p>
+                    <a href="/analyze_lifestyle" class="btn btn-primary px-4">
+                        Start Analysis
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search Doctors -->
+        <div class="col-md-5 mb-4">
+            <div class="card dashboard-card text-center p-4">
+                <div class="card-body">
+                    <div class="card-icon text-success mb-3">👨‍⚕️</div>
+                    <h5 class="card-title">Search Appropriate Doctors</h5>
+                    <p class="card-text">
+                        Find doctors based on your health condition and
+                        lifestyle-related diseases.
+                    </p>
+                    <a href="/search_doctors" class="btn btn-success px-4">
+                        Find Doctors
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

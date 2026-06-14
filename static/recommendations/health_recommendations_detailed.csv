@@ -1,0 +1,45 @@
+disease,risk_level,category,title,description
+diabetes,High,Diet,Strict Sugar Control Plan,Your current lifestyle indicates a high risk of diabetes. It is strongly advised to eliminate sugary beverages sweets and refined carbohydrates such as white bread and pastries. Focus on consuming whole grains vegetables legumes and foods with a low glycemic index to stabilize blood sugar levels.
+diabetes,High,Exercise,Structured Daily Exercise Routine,You should aim for at least 30 to 45 minutes of moderate physical activity daily such as brisk walking cycling or light jogging. Regular exercise helps improve insulin sensitivity and supports weight control.
+diabetes,High,Preventive,Regular Blood Glucose Monitoring,It is important to monitor your blood sugar levels frequently. Keeping a record will help you and your healthcare provider track patterns and take early action if needed.
+diabetes,High,Suggestion,Weight and Lifestyle Management,Maintaining a healthy body weight is crucial. Even a small reduction in weight can significantly lower your risk. Focus on consistent lifestyle improvements rather than short term changes.
+
+diabetes,Moderate,Diet,Controlled Carbohydrate Intake,You should start reducing your intake of refined carbohydrates and replace them with complex carbs like oats brown rice and whole wheat products. This helps in gradual sugar release into the bloodstream.
+diabetes,Moderate,Exercise,Increase Physical Activity,Try to include at least 20 to 30 minutes of physical activity in your daily routine. Activities like walking yoga or cycling can help improve your metabolic health.
+diabetes,Moderate,Preventive,Periodic Health Screening,It is recommended to check your blood glucose levels every 6 to 12 months to ensure that your risk does not increase over time.
+diabetes,Moderate,Suggestion,Healthy Eating Habits,Avoid skipping meals and reduce dependency on processed foods. Small consistent dietary improvements will help maintain stable sugar levels.
+
+diabetes,Low,Diet,Balanced Nutritional Intake,Your current lifestyle shows low risk but it is important to maintain a balanced diet rich in fiber vitamins and minerals to prevent future complications.
+diabetes,Low,Exercise,Maintain Active Routine,Continue engaging in regular physical activity such as walking or light exercise to keep your metabolism healthy.
+diabetes,Low,Preventive,Routine Monitoring,Even with low risk occasional health checkups are important to ensure everything remains under control.
+
+diabetes,Already Exists,Diet,Strict Diabetic Diet Compliance,Since diabetes is already present it is essential to strictly follow a diabetic friendly diet. Avoid high sugar foods monitor carbohydrate intake and follow a structured meal plan as advised by your doctor.
+diabetes,Already Exists,Exercise,Doctor Guided Physical Activity,Engage in safe and consistent exercise routines such as walking or yoga after consulting your healthcare provider to avoid complications.
+diabetes,Already Exists,Preventive,Medication and Insulin Adherence,Ensure that you take all prescribed medications or insulin on time without missing doses. Regular follow ups with your doctor are necessary.
+diabetes,Already Exists,Suggestion,Foot Care and Lifestyle Awareness,Pay special attention to foot hygiene and avoid injuries. Maintain a disciplined lifestyle to prevent complications.
+
+hypertension,High,Diet,Strict Low Sodium Diet,Your risk of hypertension is high so it is important to significantly reduce salt intake. Avoid processed foods pickles packaged snacks and restaurant meals that are high in sodium.
+hypertension,High,Exercise,Daily Relaxation and Physical Activity,Engage in moderate exercise such as walking or yoga for at least 30 minutes daily. This helps in lowering blood pressure naturally.
+hypertension,High,Preventive,Frequent Blood Pressure Monitoring,Monitor your blood pressure regularly at home and maintain a log to identify any abnormal trends early.
+hypertension,High,Suggestion,Stress Reduction Techniques,High stress levels can worsen blood pressure. Practice meditation deep breathing or relaxation techniques daily.
+
+hypertension,Moderate,Diet,Reduce Processed Food Intake,Start limiting processed and packaged foods which often contain hidden sodium. Shift towards home cooked meals.
+hypertension,Moderate,Exercise,Light Daily Activity,Include light activities such as walking stretching or yoga in your daily routine to gradually improve cardiovascular health.
+hypertension,Moderate,Preventive,Regular Checkups,Visit your doctor periodically to monitor blood pressure and prevent progression.
+hypertension,Moderate,Suggestion,Limit Caffeine Intake,Reduce consumption of tea coffee and energy drinks which may increase blood pressure.
+
+heart_disease,High,Diet,Heart Protective Diet Plan,You should avoid saturated fats fried foods and red meat. Instead include fruits vegetables whole grains and foods rich in omega 3 fatty acids like fish and nuts.
+heart_disease,High,Exercise,Cardiovascular Fitness Routine,Engage in cardio exercises such as brisk walking cycling or swimming for at least 30 minutes daily to strengthen your heart.
+heart_disease,High,Preventive,Regular Cardiac Screening,Regular ECG cholesterol and blood pressure checks are necessary to monitor heart health.
+heart_disease,High,Suggestion,Smoking and Alcohol Avoidance,If you smoke it is critical to quit immediately. Limit alcohol consumption to reduce heart strain.
+
+obesity,High,Diet,Calorie Deficit Nutrition Plan,Your BMI indicates high obesity risk. You need to reduce calorie intake and avoid junk food sugary drinks and late night eating habits.
+obesity,High,Exercise,Intensive Workout Routine,Include both cardio and strength training exercises at least 5 days a week to promote fat loss and improve metabolism.
+obesity,High,Preventive,Regular Weight Tracking,Monitor your weight weekly to track progress and stay motivated.
+obesity,High,Suggestion,Behavioral Lifestyle Changes,Identify triggers for overeating such as stress or boredom and work on controlling them through mindful eating.
+
+general,High,Suggestion,Improve Sleep Quality,Ensure that you are getting at least 7 to 8 hours of uninterrupted sleep every night as poor sleep can worsen multiple health risks.
+general,High,Preventive,Stay Properly Hydrated,Drink at least 2 to 3 liters of water daily to maintain overall body function and metabolism.
+
+general,Moderate,Suggestion,Maintain Consistent Routine,Following a regular daily schedule for meals sleep and activity helps in maintaining overall health.
+general,Low,Suggestion,Continue Healthy Lifestyle,Your current habits are good. Continue maintaining a balanced lifestyle to prevent future risks.

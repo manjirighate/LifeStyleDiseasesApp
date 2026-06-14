@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lifestyle Assessment</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+    <script src="../static/js/jquery.min.js"></script>
+    <script src="../static/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+{% include "top_user.html" %}
+<div class="container mt-4">
+
+    <h4 class="mb-3">Lifestyle Assessment</h4>
+
+    <!-- Tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a class="nav-link active" data-toggle="tab" href="#report">Lifestyle Report</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" data-toggle="tab" href="#entry">Add / Update Lifestyle</a>
+        </li>
+    </ul>
+
+    <div class="tab-content mt-3">
+
+        <!-- ================= REPORT TAB ================= -->
+        <div id="report" class="tab-pane fade show active">
+
+            <table class="table table-bordered table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Parameter</th>
+                        <th>Your Input</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for r in list %}
+                    <tr><td>Fruit Intake (per day)</td><td>{{ r.0 }}</td></tr>
+                    <tr><td>Vegetable Intake (per day)</td><td>{{ r.1 }}</td></tr>
+                    <tr><td>Fast Food (per week)</td><td>{{ r.2 }}</td></tr>
+                    <tr><td>Sugar Intake</td><td>{{ r.3 }}</td></tr>
+                    <tr><td>Fiber Intake</td><td>{{ r.12}}</td></tr>
+                    <tr><td>Exercise Days</td><td>{{ r.4 }}</td></tr>
+                    <tr><td>Sitting Hours</td><td>{{ r.5 }}</td></tr>
+                    <tr><td>Sleep Hours</td><td>{{ r.6 }}</td></tr>
+                    <tr><td>Stress Level</td><td>{{ r.7 }}</td></tr>
+                    <tr><td>Smoking</td><td>{{ r.8 }}</td></tr>
+                    <tr><td>Alcohol</td><td>{{ r.9 }}</td></tr>
+                    <tr><td>Family Diabetes</td><td>{{ r.10 }}</td></tr>
+                    <tr><td>Family Heart Disease</td><td>{{ r.11 }}</td></tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+
+        <!-- ================= ENTRY TAB ================= -->
+        <div id="entry" class="tab-pane fade">
+
+            <form id="lifeFrm" method="POST">
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <!-- Fruit Intake -->
+                    <div class="col-md-6">
+                        <label>Fruit intake per day</label>
+                        <select name="fruit_intake" class="form-control" required>
+                            <option value="">Select</option>
+                             <option value="0">Very Low</option>
+    <option value="1">Low</option>
+    <option value="2">Moderate</option>
+    <option value="3">High</option>
+    <option value="4">Very High</option>
+                        </select>
+                    </div>
+
+                    <!-- Vegetable Intake -->
+                    <div class="col-md-6">
+                        <label>Vegetable intake per day</label>
+<select name="vegetable_intake" class="form-control" required>
+    <option value="">Select</option>
+    <option value="0">Almost None</option>
+    <option value="1">Small Amount</option>
+    <option value="2">Moderate Amount</option>
+    <option value="3">Good Amount</option>
+    <option value="4">A Lot</option>
+</select>
+
+                    </div><div class="col-md-6">
+<label>Fiber intake</label>
+<select name="fiber_intake" class="form-control">
+    <option value="">Select</option>
+    <option value="0">Very Little</option>
+    <option value="1">Little</option>
+    <option value="2">Moderate</option>
+    <option value="3">Good Amount</option>
+    <option value="4">A Lot</option>
+</select></div>
+                    <!-- Fast Food -->
+                    <div class="col-md-6 mt-3">
+                       <label>Fast food intake</label>
+<select name="fast_food_frequency" class="form-control">
+    <option value="">Select</option>
+    <option value="0">Almost Never</option>
+    <option value="1">Occasionally</option>
+    <option value="2">Few Times a Week</option>
+    <option value="3">Most Days</option>
+    <option value="4">Daily</option>
+</select>
+                    </div>
+
+                    <!-- Sugary Drinks -->
+                    <div class="col-md-6 mt-3">
+                        <label>Sugar Intake</label>
+                        <select name="sugary_drinks_per_week" class="form-control">
+                                <option value="">Select</option>
+    <option value="0">Very Low</option>
+    <option value="1">Low</option>
+    <option value="2">Moderate</option>
+    <option value="3">High</option>
+    <option value="4"> High</option>
+                        </select>
+                    </div>
+
+                    <!-- Exercise -->
+                    <div class="col-md-6 mt-3">
+                        <label>Exercise in mins</label>
+                        <select name="exercise_days_per_week" class="form-control">
+                             <option value="">Select</option>
+    <option value="0">None</option>
+    <option value="1">Less than 15 minutes</option>
+    <option value="2">15–30 minutes</option>
+    <option value="3">30–60 minutes</option>
+    <option value="4">More than 60 minutes</option>
+                        </select>
+                    </div>
+
+                    <!-- Sedentary -->
+                    <div class="col-md-6 mt-3">
+                        <label>Sitting hours/day</label>
+                        <select name="sedentary_hours_per_day" class="form-control">
+                            <option value="2">0–2 hrs</option>
+                            <option value="5">3–5 hrs</option>
+                            <option value="8">6–8 hrs</option>
+                            <option value="10">8+ hrs</option>
+                        </select>
+                    </div>
+
+                    <!-- Sleep -->
+                    <div class="col-md-6 mt-3">
+                        <label>Sleep hours/day</label>
+                        <select name="sleep_hours" class="form-control">
+                            <option value="4">Less than 5</option>
+                            <option value="6">5–6</option>
+                            <option value="7">7–8</option>
+                            <option value="9">More than 8</option>
+                        </select>
+                    </div>
+
+                    <!-- Stress -->
+                    <div class="col-md-6 mt-3">
+                        <label>Stress level</label>
+                        <select name="stress_level" class="form-control">
+                            <option value="0">Low</option>
+                            <option value="1">Moderate</option>
+                            <option value="2">High</option>
+                             <option value="3">Extreme </option>
+                        </select>
+                    </div>
+
+                    <!-- Smoking -->
+                    <div class="col-md-6 mt-3">
+                        <label>Smoking</label><br>
+                        <input type="radio" name="smoking_status" value="0" checked> No
+                        <input type="radio" name="smoking_status" value="1"> Yes
+                    </div>
+
+                    <!-- Alcohol -->
+                    <div class="col-md-6 mt-3">
+                        <label>Alcohol consumption</label><br>
+                        <input type="radio" name="alcohol_consumption" value="0" checked> No
+                        <input type="radio" name="alcohol_consumption" value="1"> Yes
+                    </div>
+
+                    <!-- Family History -->
+                    <div class="col-md-6 mt-3">
+                        <label>Family history of Diabetes</label><br>
+                        <input type="radio" name="family_history_diabetes" value="0" checked> No
+                        <input type="radio" name="family_history_diabetes" value="1"> Yes
+                    </div>
+
+                    <div class="col-md-6 mt-3">
+                        <label>Family history of Heart Disease</label><br>
+                        <input type="radio" name="family_history_heart_disease" value="0" checked> No
+                        <input type="radio" name="family_history_heart_disease" value="1"> Yes
+                    </div>
+
+                    <div class="col-md-12 mt-4 text-center">
+                        <button class="btn btn-primary px-5">Save Lifestyle</button>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+
+    </div>
+</div>
+<script>
+$("#lifeFrm").submit(function(e){
+    e.preventDefault();
+
+    $.ajax({
+        type: "POST",
+        url: "/lifestyle/",
+        data: $(this).serialize(),
+        success: function(res){
+            if(res.status === "success"){
+                alert("Lifestyle details saved");
+                location.reload();   // refresh report tab
+            }
+        }
+    });
+});
+</script>
+
+</body>
+</html>

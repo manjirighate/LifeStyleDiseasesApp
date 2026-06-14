@@ -1,0 +1,19 @@
+disease,risk_level,pose_name,description,duration
+diabetes,High,Surya Namaskar,Improves metabolism and helps regulate blood sugar levels,15 minutes daily
+diabetes,High,Ardha Matsyendrasana,Stimulates pancreas and improves digestion,10 minutes
+diabetes,Moderate,Vajrasana,Improves digestion and metabolism,5-10 minutes after meals
+
+hypertension,High,Anulom Vilom,Helps reduce stress and control blood pressure,10-15 minutes
+hypertension,High,Shavasana,Relaxes body and reduces stress levels,15 minutes
+hypertension,Moderate,Bhramari Pranayama,Calms nervous system and lowers BP,10 minutes
+
+heart_disease,High,Tadasana,Improves circulation and posture,10 minutes
+heart_disease,High,Bhujangasana,Strengthens heart and lungs,10 minutes
+heart_disease,Moderate,Setu Bandhasana,Improves blood flow to heart,10 minutes
+
+obesity,High,Surya Namaskar,Burns calories and improves flexibility,20 minutes
+obesity,High,Trikonasana,Reduces belly fat and improves digestion,10 minutes
+obesity,Moderate,Veerabhadrasana,Improves strength and stamina,10 minutes
+
+general,High,Pranayama,Improves overall breathing and reduces stress,10 minutes
+general,Moderate,Deep Breathing,Enhances oxygen supply and relaxation,5-10 minutes

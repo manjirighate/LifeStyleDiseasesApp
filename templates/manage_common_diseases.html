@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Manage Common Diseases</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+        .table-container{
+            max-height:420px;
+            overflow-y:auto;
+        }
+    </style>
+</head>
+
+<body>
+{% include "top_doctor.html" %}
+
+<div class="container mt-4">
+
+    <h4 class="text-center mb-3">Common Disease Management</h4>
+
+    {% if msg %}
+    <div class="alert alert-success alert-dismissible fade show text-center">
+        {{ msg }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+    </div>
+    {% endif %}
+
+    <!-- TABS -->
+    <ul class="nav nav-tabs">
+        <li class="nav-item">
+            <button class="nav-link active" data-bs-toggle="tab" data-bs-target="#report">
+                📊 Diseases Report
+            </button>
+        </li>
+        <li class="nav-item">
+            <button class="nav-link" data-bs-toggle="tab" data-bs-target="#register">
+                ➕ Add Disease
+            </button>
+        </li>
+    </ul>
+
+    <div class="tab-content border p-4">
+
+        <!-- REPORT TAB -->
+        <div class="tab-pane fade show active" id="report">
+            <div class="table-container">
+                <table class="table table-bordered table-striped">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>Disease Name</th>
+                            <th>Speciality</th>
+                            <th width="120">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for d in diseases %}
+                        <tr>
+                            <td>{{ d.1 }}</td>
+                            <td>{{ d.2 }}</td>
+                            <td class="text-center">
+                                <a href="?delete_id={{ d.0 }}"
+                                   class="btn btn-sm btn-danger"
+                                   onclick="return confirm('Delete this disease?')">
+                                    Delete
+                                </a>
+                            </td>
+                        </tr>
+                        {% empty %}
+                        <tr>
+                            <td colspan="3" class="text-center">
+                                No diseases found
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <!-- REGISTER TAB -->
+        <div class="tab-pane fade" id="register">
+            <form method="post">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label class="form-label">Disease Name</label>
+                    <input type="text"
+                           name="disease_name"
+                           class="form-control"
+                           placeholder="Eg: Migraine, Pneumonia"
+                           required>
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Speciality</label>
+                    <input type="text" name="speciality" readonly  value="{{request.session.speciality}}" class="form-control"/>
+                     
+                </div>
+
+                <button class="btn btn-primary">
+                    Save Disease
+                </button>
+            </form>
+        </div>
+
+    </div>
+
+</div>
+
+</body>
+</html>

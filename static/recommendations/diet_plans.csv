@@ -1,0 +1,24 @@
+disease,risk_level,meal_type,meal_plan
+diabetes,High,Breakfast,Oats with chia seeds and a boiled egg or sprouts with green tea
+diabetes,High,Lunch,2 whole wheat roti with mixed vegetable curry and dal
+diabetes,High,Dinner,Grilled vegetables with paneer or chicken soup
+
+diabetes,Moderate,Breakfast,Vegetable poha or upma with low oil
+diabetes,Moderate,Lunch,Brown rice with dal and salad
+diabetes,Moderate,Dinner,Light vegetable soup and chapati
+
+hypertension,High,Breakfast,Oats with fruits and low fat milk
+hypertension,High,Lunch,Low salt dal brown rice and salad
+hypertension,High,Dinner,Vegetable soup and whole wheat roti
+
+heart_disease,High,Breakfast,Oatmeal with nuts and fruits
+heart_disease,High,Lunch,Grilled vegetables with quinoa or brown rice
+heart_disease,High,Dinner,Light soup with steamed vegetables
+
+obesity,High,Breakfast,Boiled eggs or sprouts with green tea
+obesity,High,Lunch,Grilled chicken or paneer with salad
+obesity,High,Dinner,Vegetable soup and avoid carbs at night
+
+general,Moderate,Breakfast,Fruits and nuts with milk
+general,Moderate,Lunch,Balanced home cooked meal with vegetables and dal
+general,Moderate,Dinner,Light dinner with soup or salad

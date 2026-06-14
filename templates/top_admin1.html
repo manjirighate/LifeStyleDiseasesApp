@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>  LifeStyle Analyzer</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap 4 -->
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="../static/css/ionicons.min.css">
+    <link rel="stylesheet" href="../static/css/icomoon.css">
+
+    <style>
+        body {
+            background: #f4f6f9;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            height: 100vh;
+            background: #343a40;
+            color: #fff;
+            position: fixed;
+            width: 240px;
+            top: 0;
+            left: 0;
+        }
+
+        .sidebar h4 {
+            border-bottom: 1px solid #444;
+        }
+
+        .sidebar a {
+            color: #ddd;
+            display: block;
+            padding: 12px 20px;
+            text-decoration: none;
+        }
+
+        .sidebar a:hover,
+        .sidebar a.active {
+            background: #007bff;
+            color: #fff;
+        }
+
+        /* Content */
+        .content {
+            margin-left: 240px;
+            min-height: 100vh;
+            background: #f4f6f9;
+        }
+
+        /* Banner */
+        .admin-banner {
+            position: relative;
+            background-image: url('../static/images/innerbanner.png');
+            background-size: cover;
+            background-position: center;
+            min-height: 240px;
+            padding: 40px 25px;
+            display: flex;
+            align-items: center;
+        }
+
+        .admin-banner .overlay {
+            position: absolute;
+            inset: 0;
+            background: transparent;
+        }
+
+        .admin-banner .container-fluid {
+            position: relative;
+            z-index: 1;
+            width: 100%;
+        }
+
+        /* Topbar */
+        .topbar {
+            background: #ffffff;
+            padding: 12px 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .breadcrumb a {
+            color: #ffffff;
+        }
+    </style>
+</head>
+
+<body>
+
+<!-- Sidebar -->
+<div class="sidebar">
+    <h4 class="text-center py-3">LifeStyle Analyzer</h4>
+
+    <a href="/admin/" class="active">
+        <i class="icon-speedometer"></i> Dashboard
+    </a>
+    <a href="/admin/">
+        <i class="icon-people"></i> Users
+    </a>
+    
+    <a href="/viewDoctors/">
+        <i class="icon-user-md"></i> Doctors
+    </a>
+    
+    <a href="/manage-recommendations/">
+        <i class="icon-user-md"></i> Manage Recommendations
+    </a>
+    
+    <!--
+    <a href="/admin-predictions/">
+        <i class="icon-bar-chart"></i> Predictions
+    </a>
+    <a href="/admin-settings/">
+        <i class="icon-cog"></i> Settings
+    </a>-->
+    <a href="/logout/">
+        <i class="icon-log-out"></i> Logout
+    </a>
+</div>
+
+<!-- Main Content -->
+<div class="content">
+
+    <!-- Banner -->
+    <section class="admin-banner">
+        <div class="overlay"></div>
+        <div class="container-fluid">
+            <div class="row align-items-center">
+                <div class="col-md-8 text-white">
+                    <h3 class="mb-1">Admin Home</h3>
+                    <p class="mb-0">LifeStyle Analyzer Management Panel</p>
+                </div>
+                <div class="col-md-4 text-right text-white">
+                    Logged in as <strong>{{ request.session.username }}</strong>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top Bar -->
+    <div class="topbar d-flex justify-content-between align-items-center">
+        <h5 class="mb-0">Dashboard</h5>
+        <span>Welcome, {{ request.session.username }}</span>
+    </div>
+<div class="container"> 
+ 
+
+<!-- Scripts -->
+<script src="../static/js/jquery.min.js"></script>
+<script src="../static/js/bootstrap.min.js"></script>
+
+</body>
+</html>

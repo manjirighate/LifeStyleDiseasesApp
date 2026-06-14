@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Lifestyle Analysis Result</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="../static/css/bootstrap.min.css">
+
+    <style>
+        .risk-card {
+            border-radius: 15px;
+            transition: 0.3s;
+        }
+        .risk-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.15);
+        }
+        .risk-title {
+            font-size: 18px;
+            font-weight: 600;
+        }
+        .risk-value {
+            font-size: 22px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+{% include "top_user.html" %}
+
+<div class="container mt-4">
+
+    <h3 class="text-center mb-2">Lifestyle Analysis Report</h3>
+    <p class="text-center text-muted mb-4">
+        Based on your lifestyle habits and health information
+    </p>
+
+    <!-- ================= RISK SUMMARY ================= -->
+    <div class="row text-center mb-5">
+
+        <div class="col-md-4 mb-3">
+            <div class="card risk-card p-4">
+                <div class="risk-title text-primary">Diabetes Risk</div>
+                <div class="risk-value">{{ result.diabetes_risk }}</div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card risk-card p-4">
+                <div class="risk-title text-danger">Heart Disease Risk</div>
+                <div class="risk-value">{{ result.heart_disease_risk }}</div>
+            </div>
+        </div>
+
+        <div class="col-md-4 mb-3">
+            <div class="card risk-card p-4">
+                <div class="risk-title text-warning">Obesity Risk</div>
+                <div class="risk-value">{{ result.obesity_risk }}</div>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- ================= LIFESTYLE SUMMARY ================= -->
+    <div class="card mb-4">
+        <div class="card-header bg-dark text-white">
+            Your Lifestyle Summary
+        </div>
+        <div class="card-body">
+
+            <table class="table table-bordered">
+                <tr>
+                    <th>Fruit Intake</th>
+                    <td>{{ lifestyle.0 }}</td>
+                </tr>
+                <tr>
+                    <th>Vegetable Intake</th>
+                    <td>{{ lifestyle.1 }}</td>
+                </tr>
+                <tr>
+                    <th>Fast Food Intake</th>
+                    <td>{{ lifestyle.2 }}</td>
+                </tr>
+                <tr>
+                    <th>Sugar Intake</th>
+                    <td>{{ lifestyle.3 }}</td>
+                </tr>
+                <tr>
+                    <th>Exercise</th>
+                    <td>{{ lifestyle.4 }}</td>
+                </tr>
+                <tr>
+                    <th>Sitting Hours</th>
+                    <td>{{ lifestyle.5 }}</td>
+                </tr>
+                <tr>
+                    <th>Sleep Hours</th>
+                    <td>{{ lifestyle.6 }}</td>
+                </tr>
+                <tr>
+                    <th>Stress Level</th>
+                    <td>{{ lifestyle.7 }}</td>
+                </tr>
+                <tr>
+                    <th>Smoking</th>
+                    <td>{{ lifestyle.8 }}</td>
+                </tr>
+                <tr>
+                    <th>Alcohol</th>
+                    <td>{{ lifestyle.9 }}</td>
+                </tr>
+            </table>
+
+        </div>
+    </div>
+
+    <!-- ================= ACTION BUTTONS ================= -->
+    <div class="text-center mb-5">
+        <a href="/lifestyle/" class="btn btn-outline-primary px-4 mr-2">
+            Update Lifestyle
+        </a>
+        <a href="/search-doctors/" class="btn btn-success px-4">
+            Find Doctors
+        </a>
+    </div>
+
+</div>
+
+<script src="../static/js/bootstrap.min.js"></script>
+</body>
+</html>

@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Health Risk Analysis</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-family: Arial; background: #f4f6f9; }
+
+        .card {
+            background: #fff;
+            padding: 20px;
+            margin: 20px auto;
+            width: 80%;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .risk-title { font-size: 20px; font-weight: bold; }
+
+        .badge {
+            padding: 5px 12px;
+            border-radius: 20px;
+            color: white;
+            font-size: 14px;
+        }
+
+        .low { background: #2ecc71; }
+        .moderate { background: #f1c40f; color: black; }
+        .high { background: #e74c3c; }
+
+        .progress {
+            background: #eee;
+            border-radius: 20px;
+            height: 22px;
+            margin-top: 10px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            text-align: center;
+            font-size: 13px;
+            color: white;
+        }
+
+        .tabs {
+            display: flex;
+            border-bottom: 2px solid #ddd;
+            margin-bottom: 20px;
+        }
+
+        .tab {
+            padding: 12px 20px;
+            cursor: pointer;
+            font-weight: bold;
+            border-bottom: 3px solid transparent;
+        }
+
+        .tab.active {
+            border-color: #3498db;
+            color: #3498db;
+        }
+
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+    </style>
+</head>
+
+<body>
+{% include "top_user.html" %}
+
+<div class="card">
+    <h2>🩺 Lifestyle Disease Risk Analysis</h2>
+
+    <div class="tabs">
+        <div class="tab active" id="analysis-tab" onclick="showTab('analysis')">
+            📊 Result Analysis
+        </div>
+        <div class="tab" id="prevention-tab" onclick="showTab('prevention')">
+            🧘 Preventive Measures
+        </div>
+    </div>
+
+    <!-- ANALYSIS TAB -->
+    <div class="tab-content active" id="analysis">
+{% for disease, data in result.items %}
+<div style="margin-bottom:30px;">
+
+     
+   <h3>
+    {{ disease|cut:"_risk"|title }}
+
+    {% if data.already_exists %}
+        <span class="badge" style="background:#8e44ad;">
+            ⚠ Already Exists
+        </span>
+    {% else %}
+        <span class="badge {{ data.level|lower }}">
+            {{ data.level }}
+        </span>
+    {% endif %}
+</h3>
+
+    <div class="progress">
+        <div class="progress-bar {{ data.level|lower }}"
+             style="width: {{ data.probability }}%;">
+            {{ data.probability }}%
+        </div>
+    </div>
+
+    <!-- FACTORS -->
+    {% if disease_factors %}
+        {% for key, factors in disease_factors.items %}
+            {% if key == disease %}
+                <div style="margin-top:15px;">
+                    <strong>🔍 Key Influencing Factors</strong>
+                    <ul style="margin-top:8px;">
+                        {% for f in factors %}
+                            <li style="
+                                font-weight: bold;
+                                color:
+                                {% if f.level == 'High' %}#e74c3c
+                                {% elif f.level == 'Moderate' %}#f39c12
+                                {% else %}#2ecc71{% endif %}
+                            ">
+                                {{ f.name }} → {{ f.level }}
+                            </li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+        {% endfor %}
+    {% endif %}
+
+</div>
+{% endfor %}
+
+      
+
+        <canvas id="riskChart"></canvas>
+    </div>
+
+    <!-- PREVENTION TAB -->
+     <div class="tab-content" id="prevention">
+    <h3>🧘 Personalized Health Plan</h3>
+
+    {% if recommendations %}
+
+        <!-- DIET -->
+        {% if recommendations.Diet %}
+        <h4>🥗 Diet Recommendations</h4>
+        {% for rec in recommendations.Diet %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- MEAL PLAN -->
+        {% if recommendations.MealPlan %}
+        <h4>🍽 Daily Meal Plan</h4>
+        {% for rec in recommendations.MealPlan %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- EXERCISE -->
+        {% if recommendations.Exercise %}
+        <h4>🏃 Exercise Plan</h4>
+        {% for rec in recommendations.Exercise %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- YOGA -->
+        {% if recommendations.Yoga %}
+        <h4>🧘 Yoga Recommendations</h4>
+        {% for rec in recommendations.Yoga %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- PREVENTIVE -->
+        {% if recommendations.Preventive %}
+        <h4>🛡 Preventive Measures</h4>
+        {% for rec in recommendations.Preventive %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+        <!-- GENERAL -->
+        {% if recommendations.Suggestion %}
+        <h4>💡 Lifestyle Suggestions</h4>
+        {% for rec in recommendations.Suggestion %}
+            <div>
+                <strong>{{ rec.title }}</strong>
+                <p>{{ rec.description }}</p>
+            </div>
+        {% endfor %}
+        {% endif %}
+
+    {% else %}
+        <p>🎉 No risks detected. Keep maintaining your healthy lifestyle!</p>
+    {% endif %}
+</div>
+   
+</div>
+
+<script>
+function showTab(tabId) {
+    document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+
+    document.getElementById(tabId).classList.add('active');
+    document.getElementById(tabId + '-tab').classList.add('active');
+}
+</script>
+
+<script>
+new Chart(document.getElementById('riskChart'), {
+    type: 'bar',
+    data: {
+        labels: ['Diabetes','Hypertension','Heart Disease','Obesity'],
+        datasets: [{
+            label: 'Risk %',
+            data: [
+                {{ result.diabetes_risk.probability }},
+                {{ result.hypertension_risk.probability }},
+                {{ result.heart_disease_risk.probability }},
+                {{ result.obesity_risk.probability }}
+            ],
+            backgroundColor: ['#3498db','#e74c3c','#9b59b6','#2ecc71']
+        }]
+    },
+    options: {
+        scales: {
+            y: { beginAtZero: true, max: 100 }
+        }
+    }
+});
+</script>
+
+</body>
+</html>
