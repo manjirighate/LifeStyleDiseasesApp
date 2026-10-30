@@ -33,10 +33,10 @@ Python, LightGBM, Scikit-learn, Pandas, Django, joblib, HTML/CSS/JS
   do not reflect real patients
 - Current metrics are modest (best ROC-AUC 0.75); class imbalance is the
   main issue — threshold tuning and SMOTE are the planned next steps
-- Evaluation and training scripts need to point to the same dataset version
+
 
 ## Run locally
-1. `pip install django lightgbm scikit-learn pandas joblib`
+1. `pip install -r requirements.txt`
 2. `python manage.py migrate`
 3. `python manage.py runserver`
 4. Open http://127.0.0.1:8000
